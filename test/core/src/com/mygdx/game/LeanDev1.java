@@ -27,7 +27,7 @@ public class LeanDev1 extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		texture = new Texture(Gdx.files.internal("animation_sheet.png"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
+		TextureRegion region = new TextureRegion(texture, 0, 0, 300, 300);
 		sprite = new Sprite(region);
 		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
