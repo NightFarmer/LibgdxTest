@@ -11,6 +11,8 @@ public class DesktopLauncher {
 		config.title = "≤‚ ‘";
 		config.width = 800;
 		config.height = 480;
+		config.width = 100;
+		config.height = 180;
 //		new LwjglApplication(new MyGdxGame(), config);
 //		new LwjglApplication(new LeanDev1(), config);
 		new LwjglApplication(new CanyonBunnyMain(), config);
