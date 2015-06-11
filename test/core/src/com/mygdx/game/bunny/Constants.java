@@ -5,4 +5,6 @@ public class Constants {
 	public static final float VIEWPORT_WIDTH = 5F;
 	
 	public static final float VIEWPORT_HEIGHT = 5f;
+	
+	public static final String TEXTURE_ATLAS_OBJECTS = "images/testgame.pack.atlas";
 }

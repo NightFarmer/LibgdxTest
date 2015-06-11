@@ -36,7 +36,7 @@ public class WorldController extends InputAdapter{
 		Pixmap pixmap = createProceduralPixmap(width, height);
 		Texture texture = new Texture(pixmap);
 //		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		for (int i = 0; i < testSprites.length; i++) {
+		for (int i = 0; i < testSprites.length-1; i++) {
 			Sprite sprite = new Sprite(texture);
 			sprite.setSize(1, 1);
 			sprite.setOrigin(sprite.getWidth()/2.0f, sprite.getHeight()/2.0f);
@@ -45,6 +45,16 @@ public class WorldController extends InputAdapter{
 			sprite.setPosition(randomX, randomY);
 			testSprites[i] = sprite;
 		}
+		
+		Sprite sprite = new Sprite(Assets.instance.longWang.findRegion.get(0));
+		sprite.setSize(1, 1);
+		sprite.setOrigin(sprite.getWidth()/2.0f, sprite.getHeight()/2.0f);
+//		Sprite sprite = new Sprite(new Texture("images/daxianren/2239-eb00de5f-00000.png"));
+//		Sprite sprite = new Sprite(new Texture("images/testgame.pack.png"));
+		float randomX = MathUtils.random(-2.0f, 2.0f);
+		float randomY = MathUtils.random(-2.0f, 2.0f);
+		sprite.setPosition(randomX, randomY);
+		testSprites[testSprites.length-1] = sprite;
 		selectedSprite = 0;
 	}
 	
@@ -128,7 +138,7 @@ public class WorldController extends InputAdapter{
 	
 	private void updateTestObjects(float deltaTime) {
 		float rotation = testSprites[selectedSprite].getRotation();
-		rotation+=400*deltaTime;
+		rotation+=90*deltaTime;
 		rotation%=360;
 		testSprites[selectedSprite].setRotation(rotation);
 	}
