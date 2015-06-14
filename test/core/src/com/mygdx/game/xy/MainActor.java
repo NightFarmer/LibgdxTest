@@ -133,7 +133,7 @@ public class MainActor extends MoveAbleActor implements CanImpact{
 	private void checkImpact(){
 		float x1 = rock.position.x;
 		float y1 = rock.position.y;
-		System.out.println(x1+"======="+y1);
+//		System.out.println(x1+"======="+y1);
 		for (ImpactListener listener : impactListeners) {
 			CanImpact obj = listener.getObj();
 			Vector2 center = obj.getCenter();

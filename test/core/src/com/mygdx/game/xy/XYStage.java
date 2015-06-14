@@ -62,24 +62,25 @@ public abstract class XYStage extends Stage{
 	}
 	
 	public void startStage(Class<? extends XYStage> cls, Vector2 actorPosition, SpriteState actorState){
-		XYStage findStage = XYGame.findStage(cls);
-		if (findStage!=null) {
-			XYGame.setCurrentStage(findStage);
-			findStage.setActorPositon(actorPosition);
-			findStage.cameraHelper.setStage(findStage);
-			MainActor zj = findStage.getZJ();
+		XYStage nextStage = XYGame.findStage(cls);
+		if (nextStage!=null) {
+			XYGame.setCurrentStage(nextStage);
+			nextStage.setActorPositon(actorPosition);
+			nextStage.cameraHelper.setStage(nextStage);
+			MainActor zj = nextStage.getZJ();
 			zj.setOnImpact(true);
 			zj.setState(actorState);
-			findStage.cameraHelper.setTarget(zj.getGameObject());
+			nextStage.cameraHelper.setTarget(zj.getGameObject());
 		}else {
 			try {
 				Constructor<? extends XYStage> cons = cls.getConstructor(new Class[] { CameraHelper.class , Vector2.class, SpriteState.class});
-				XYStage newInstance = cons.newInstance(cameraHelper, actorPosition, actorState);
-				XYGame.addCurrentStage(newInstance);
+				nextStage = cons.newInstance(cameraHelper, actorPosition, actorState);
+				XYGame.addCurrentStage(nextStage);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		nextStage.onResize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		cameraHelper.onResize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 	
