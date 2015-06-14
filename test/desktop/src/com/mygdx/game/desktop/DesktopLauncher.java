@@ -5,11 +5,12 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
 import com.mygdx.game.bunny.CanyonBunnyMain;
+import com.mygdx.game.xy.XYGame;
 
 public class DesktopLauncher {
 
-	private static boolean rebuildAtlas = false;
-	private static boolean drawDebugOutline = true;
+	private static boolean rebuildAtlas = true;
+	private static boolean drawDebugOutline = false;
 
 	public static void main(String[] arg) {
 
@@ -19,18 +20,22 @@ public class DesktopLauncher {
 			settings.maxHeight = 1024;
 			settings.duplicatePadding = false;
 			settings.debug = drawDebugOutline;
-			TexturePacker.process(settings, "assets-raw/images",
-					"../android/assets/images", "testgame.pack");
+//			TexturePacker.processIfModified(settings, "assets-raw/images/npc",
+//					"../android/assets/images", "npc.pack");
+//			TexturePacker.processIfModified(settings, "assets-raw/images/juese",
+//					"../android/assets/images", "juese.pack");
+//			TexturePacker.process(settings, "assets-raw/images/texiao",
+//					"../android/assets/images", "texiao.pack");
 		}
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "≤‚ ‘";
-		config.width = 800;
 		config.height = 480;
-		config.width = 100;
-		config.height = 180;
+		config.width = 480 *16/9;
+//		config.width = 100;
+//		config.height = 180;
 		// new LwjglApplication(new MyGdxGame(), config);
 		// new LwjglApplication(new LeanDev1(), config);
-		new LwjglApplication(new CanyonBunnyMain(), config);
+		new LwjglApplication(new XYGame(), config);
 	}
 }

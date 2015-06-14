@@ -1,6 +1,7 @@
 package com.mygdx.game.bunny;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.utils.Disposable;
 import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 
@@ -21,26 +23,25 @@ public class Assets implements Disposable, AssetErrorListener{
 	public static final Assets instance = new Assets();
 	
 	private AssetManager assetManager;
+	
+//	private java.util.Map<String, TextureAtlas> textureAtlasMap = new HashMap<String, TextureAtlas>();
 
-	public LongWang longWang;
 	
 	private Assets() {
 	}
 	
-	public void init(AssetManager assetManager) {
+	public void init(AssetManager assetManager, String[] files) {
 		this.assetManager = assetManager;
 		assetManager.setErrorListener(this);
-		assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
+		for (String string : files) {
+			assetManager.load(string, TextureAtlas.class);
+		}
 		assetManager.finishLoading();
 		Gdx.app.log(TAG, "# of assets loaded: "+ assetManager.getAssetNames().size);
 		for (String name : assetManager.getAssetNames()) {
 			Gdx.app.log(TAG, "asset: "+name);
 		}
-		TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
-		for (Texture texture : atlas.getTextures()) {
-			texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		}
-		longWang = new LongWang(atlas);
+		
 	}
 	
 	@Override
@@ -54,16 +55,25 @@ public class Assets implements Disposable, AssetErrorListener{
 		assetManager.dispose();
 	}
 
-	public class LongWang {
-		
-		public List<AtlasRegion> findRegion;
-
-		public LongWang(TextureAtlas atlas) {
-			findRegion = new ArrayList<TextureAtlas.AtlasRegion>();
-			for (int i = 0; i < 7; i++) {
-				AtlasRegion findRegion2 = atlas.findRegion("longwang/1272-810e3469-0000"+i);
-				findRegion.add(findRegion2);
-			}
+	/**
+	 * @param file 纹理集文件
+	 * @param folder 子文件名
+	 * @param direction 方向 
+	 * @param framCount 帧数
+	 * @return
+	 */
+	public ArrayList<AtlasRegion> getList(String file, String folder, String direction, int framCount){
+		TextureAtlas atlas = assetManager.get(file);
+		for (Texture texture : atlas.getTextures()) {
+			texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		}
+		ArrayList<AtlasRegion> findRegion = new ArrayList<TextureAtlas.AtlasRegion>();
+		for (int i = 0; i < framCount; i++) {
+			AtlasRegion findRegion2 = atlas.findRegion(folder+"/"+direction+"00"+i);
+			findRegion.add(findRegion2);
+		}
+		return findRegion;
 	}
+	
+	
 }

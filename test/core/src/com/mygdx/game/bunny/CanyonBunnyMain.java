@@ -17,7 +17,7 @@ public class CanyonBunnyMain  extends ApplicationAdapter{
 	@Override
 	public void create() {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
-		Assets.instance.init(new AssetManager());
+		Assets.instance.init(new AssetManager(), Constants.TEXTURE_ATLAS_FILE_LIST_LONGGONG);
 		worldController = new WorldController();
 		worldRenderer = new WorldRenderer(worldController);
 		paused = false;

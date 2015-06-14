@@ -3,6 +3,7 @@ package com.mygdx.game.bunny;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 
 public class CameraHelper {
@@ -15,17 +16,39 @@ public class CameraHelper {
 	private Vector2 position;
 	private float zoom;
 	
-	private Sprite target;
+	private AbstractGameObject target;
+
+	private Sprite ditu;
+
+	private OrthographicCamera camera;
 	
-	public CameraHelper() {
+	public CameraHelper(Sprite dituSprite, OrthographicCamera camera) {
 		position = new Vector2();
 		zoom = 1;
+		this.ditu = dituSprite;
+		this.camera = camera;
 	}
 	
 	public void update(float deltaTime) {
 		if (!hasTarget()) return;
-		position.x = target.getX() + target.getOriginX();
-		position.y = target.getY() + target.getOriginY();
+		check();
+	}
+	
+	public void check(){
+		position.x = target.position.x + target.dimension.x/2;
+		position.y = target.position.y + target.dimension.y/2;
+		if (ditu.getWidth()<position.x+camera.viewportWidth/2) {
+			position.x = ditu.getWidth()-camera.viewportWidth/2;
+		}
+		if (ditu.getHeight()<position.y+camera.viewportHeight/2) {
+			position.y = ditu.getHeight()-camera.viewportHeight/2;
+		}
+		if (0>position.y-camera.viewportHeight/2) {
+			position.y = camera.viewportHeight/2;
+		}
+		if (0>position.x-camera.viewportWidth/2) {
+			position.x = camera.viewportWidth/2;
+		}
 	}
 	
 	public void setPosition(float x, float y) {
@@ -48,11 +71,11 @@ public class CameraHelper {
 		return zoom;
 	}
 	
-	public void setTarget(Sprite target) {
+	public void setTarget(AbstractGameObject target) {
 		this.target = target;
 	}
 
-	public Sprite getTarget() {
+	public AbstractGameObject getTarget() {
 		return target;
 	}
 
@@ -64,10 +87,20 @@ public class CameraHelper {
 		return hasTarget() && this.target.equals(target);
 	}
 
-	public void applyTo(OrthographicCamera camera) {
+	public OrthographicCamera getCamera() {
+		return camera;
+	}
+
+	public void applyTo() {
 		camera.position.x = position.x;
 		camera.position.y = position.y;
 		camera.zoom = zoom;
 		camera.update();
+	}
+	
+	public void onResize(int width, int height){
+		camera.viewportWidth = (Constants.VIEWPORT_HEIGHT/height)*width;
+		check();
+		applyTo();
 	}
 }

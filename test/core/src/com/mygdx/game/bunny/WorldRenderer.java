@@ -1,5 +1,6 @@
 package com.mygdx.game.bunny;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -7,7 +8,6 @@ import com.badlogic.gdx.utils.Disposable;
 
 public class WorldRenderer implements Disposable{
 
-	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private WorldController controller;
 	
@@ -18,9 +18,6 @@ public class WorldRenderer implements Disposable{
 
 	private void init() {
 		batch = new SpriteBatch();
-		camera = new OrthographicCamera(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
-		camera.position.set(0, 0, 0);
-		camera.update();
 	}
 	
 	public void render() { 
@@ -28,17 +25,22 @@ public class WorldRenderer implements Disposable{
 	}
 	
 	private void renderTestObjects() {
-		controller.cameraHelper.applyTo(camera);
-		batch.setProjectionMatrix(camera.combined);
+		controller.cameraHelper.applyTo();
+		batch.setProjectionMatrix(controller.cameraHelper.getCamera().combined);
 		batch.begin();
+		controller.dituSprite.draw(batch);
 		for (Sprite sprite : controller.testSprites) {
 			sprite.draw(batch);
 		}
+		controller.rock.render(batch);
+		controller.rock2.render(batch);
 		batch.end();
+		
 	}
 
 	public void resize(int width, int height) {
-		camera.viewportWidth = (Constants.VIEWPORT_HEIGHT/height)*width;
+		controller.cameraHelper.onResize(width, height);
+//		controller.cameraHelper.setPosition(camera.viewportWidth/2, camera.viewportHeight/2);
 //		if (width<=height) {
 //			camera.viewportWidth = (Constants.VIEWPORT_HEIGHT/height)*width;
 //			camera.viewportHeight = Constants.VIEWPORT_HEIGHT;
@@ -54,7 +56,6 @@ public class WorldRenderer implements Disposable{
 //			camera.viewportWidth = (Constants.VIEWPORT_HEIGHT/height)*width;
 //			camera.viewportHeight = Constants.VIEWPORT_HEIGHT;
 //		}
-		camera.update();
 	}
 
 

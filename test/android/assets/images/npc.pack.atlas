@@ -1,0 +1,286 @@
+
+npc.pack.png
+size: 1024,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+longwang/00000
+  rotate: false
+  xy: 2, 390
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/00001
+  rotate: false
+  xy: 2, 293
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/00002
+  rotate: false
+  xy: 82, 390
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/00003
+  rotate: false
+  xy: 2, 196
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/00004
+  rotate: false
+  xy: 82, 293
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/00005
+  rotate: false
+  xy: 162, 390
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/00006
+  rotate: false
+  xy: 2, 99
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/00007
+  rotate: false
+  xy: 82, 196
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/00008
+  rotate: false
+  xy: 162, 293
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/00009
+  rotate: false
+  xy: 242, 390
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/01000
+  rotate: false
+  xy: 2, 2
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/01001
+  rotate: false
+  xy: 82, 99
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/01002
+  rotate: false
+  xy: 162, 196
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/01003
+  rotate: false
+  xy: 242, 293
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/01004
+  rotate: false
+  xy: 322, 390
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/01005
+  rotate: false
+  xy: 82, 2
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/01006
+  rotate: false
+  xy: 162, 99
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/01007
+  rotate: false
+  xy: 242, 196
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/01008
+  rotate: false
+  xy: 322, 293
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/01009
+  rotate: false
+  xy: 402, 390
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/02000
+  rotate: false
+  xy: 162, 2
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/02001
+  rotate: false
+  xy: 242, 99
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/02002
+  rotate: false
+  xy: 322, 196
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/02003
+  rotate: false
+  xy: 402, 293
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/02004
+  rotate: false
+  xy: 482, 390
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/02005
+  rotate: false
+  xy: 242, 2
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/02006
+  rotate: false
+  xy: 322, 99
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/02007
+  rotate: false
+  xy: 402, 196
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/02008
+  rotate: false
+  xy: 482, 293
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/02009
+  rotate: false
+  xy: 562, 390
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/03000
+  rotate: false
+  xy: 322, 2
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/03001
+  rotate: false
+  xy: 402, 99
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/03002
+  rotate: false
+  xy: 482, 196
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/03003
+  rotate: false
+  xy: 562, 293
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/03004
+  rotate: false
+  xy: 642, 390
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/03005
+  rotate: false
+  xy: 402, 2
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/03006
+  rotate: false
+  xy: 482, 99
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/03007
+  rotate: false
+  xy: 562, 196
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/03008
+  rotate: false
+  xy: 642, 293
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+longwang/03009
+  rotate: false
+  xy: 722, 390
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1

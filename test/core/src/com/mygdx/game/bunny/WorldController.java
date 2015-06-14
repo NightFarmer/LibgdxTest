@@ -1,5 +1,7 @@
 package com.mygdx.game.bunny;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
@@ -10,7 +12,9 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 
 public class WorldController extends InputAdapter{
 
@@ -18,6 +22,10 @@ public class WorldController extends InputAdapter{
 	public Sprite[] testSprites;
 	private int selectedSprite;
 	public CameraHelper cameraHelper;
+	public Rock rock;
+	public Rock rock2;
+	public Sprite dituSprite;
+	private OrthographicCamera camera;
 	
 	public WorldController() {
 		init();
@@ -25,8 +33,10 @@ public class WorldController extends InputAdapter{
 	
 	private void init() {
 		Gdx.input.setInputProcessor(this);
-		cameraHelper = new CameraHelper();
 		initTestObjects();
+		camera = new OrthographicCamera(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
+		cameraHelper = new CameraHelper(dituSprite, camera);
+		cameraHelper.setTarget(rock2);
 	}
 	
 	private void initTestObjects() {
@@ -36,25 +46,38 @@ public class WorldController extends InputAdapter{
 		Pixmap pixmap = createProceduralPixmap(width, height);
 		Texture texture = new Texture(pixmap);
 //		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		for (int i = 0; i < testSprites.length-1; i++) {
-			Sprite sprite = new Sprite(texture);
-			sprite.setSize(1, 1);
+		
+		ArrayList<AtlasRegion> list = Assets.instance.getList(Constants.TEXTURE_ATLAS_FILE_NPC, Constants.NPC_LONGWANG, "00", Constants.TNPC_LONGWANG_FRAM_NUM[0]);
+		
+		for (int i = 0; i < testSprites.length; i++) {
+			Sprite sprite = new Sprite(list.get(i));
+			sprite.setSize(10, 10);
 			sprite.setOrigin(sprite.getWidth()/2.0f, sprite.getHeight()/2.0f);
-			float randomX = MathUtils.random(-2.0f, 2.0f);
-			float randomY = MathUtils.random(-2.0f, 2.0f);
+			float randomX = MathUtils.random(-20f, 20f);
+			float randomY = MathUtils.random(-20f, 20f);
 			sprite.setPosition(randomX, randomY);
 			testSprites[i] = sprite;
 		}
+		rock = new Rock();
+		rock2 = new Rock();
+		rock.position= new Vector2(25, -25);
+		rock2.position= new Vector2(0, 0);
 		
-		Sprite sprite = new Sprite(Assets.instance.longWang.findRegion.get(0));
-		sprite.setSize(1, 1);
-		sprite.setOrigin(sprite.getWidth()/2.0f, sprite.getHeight()/2.0f);
+		
+		Texture ditu = new Texture("images/map/fangcunshan.jpg");
+		dituSprite = new Sprite(ditu);
+		dituSprite.setPosition(0, 0);
+		dituSprite.setSize(ditu.getHeight()/10, ditu.getHeight()/10);
+//		ArrayList<AtlasRegion> list = Assets.instance.getList(Constants.TEXTURE_ATLAS_FILE_NPC, Constants.NPC_LONGWANG, "00", 10);
+//		Sprite sprite = new Sprite(list.get(0));
+//		sprite.setSize(1, 1);
+//		sprite.setOrigin(sprite.getWidth()/2.0f, sprite.getHeight()/2.0f);
 //		Sprite sprite = new Sprite(new Texture("images/daxianren/2239-eb00de5f-00000.png"));
 //		Sprite sprite = new Sprite(new Texture("images/testgame.pack.png"));
-		float randomX = MathUtils.random(-2.0f, 2.0f);
-		float randomY = MathUtils.random(-2.0f, 2.0f);
-		sprite.setPosition(randomX, randomY);
-		testSprites[testSprites.length-1] = sprite;
+//		float randomX = MathUtils.random(-2.0f, 2.0f);
+//		float randomY = MathUtils.random(-2.0f, 2.0f);
+//		sprite.setPosition(randomX, randomY);
+//		testSprites[testSprites.length-1] = sprite;
 		selectedSprite = 0;
 	}
 	
@@ -82,7 +105,7 @@ public class WorldController extends InputAdapter{
 		if (Gdx.app.getType()!=ApplicationType.Desktop) {
 			return;
 		}
-		float moveSpeed = 5* deltaTime;
+		float moveSpeed = 20* deltaTime;
 		if (Gdx.input.isKeyPressed(Keys.A)) {
 			moveSelectedSprite(-moveSpeed, 0);
 		}
@@ -133,7 +156,9 @@ public class WorldController extends InputAdapter{
 		
 		
 	private void moveSelectedSprite(float x, float y){
-		testSprites[selectedSprite].translate(x, y);
+//		testSprites[selectedSprite].translate(x, y);
+		rock2.position.x+=x;
+		rock2.position.y+=y;
 	}
 	
 	private void updateTestObjects(float deltaTime) {
@@ -151,12 +176,12 @@ public class WorldController extends InputAdapter{
 		} else if (Keys.SPACE == keycode) {
 			selectedSprite = (selectedSprite+1)%testSprites.length;
 			if (cameraHelper.hasTarget()) {
-				cameraHelper.setTarget(testSprites[selectedSprite]);
+//				cameraHelper.setTarget(testSprites[selectedSprite]);
 			}
 			Gdx.app.debug(TAG, "sprite #"+selectedSprite+" selected");
 		} else if (keycode == Keys.ENTER) {
-			cameraHelper.setTarget(cameraHelper.hasTarget() ? null
-					: testSprites[selectedSprite]);
+//			cameraHelper.setTarget(cameraHelper.hasTarget() ? null
+//					: testSprites[selectedSprite]);
 			Gdx.app.debug(TAG,
 					"Camera follow enabled: " + cameraHelper.hasTarget());
 		}
