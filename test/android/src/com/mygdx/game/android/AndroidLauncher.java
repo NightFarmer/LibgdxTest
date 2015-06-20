@@ -4,9 +4,7 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.bunny.CanyonBunnyMain;
-import com.mygdx.game.xy.XYGame;
+import com.mygdx.game.xy.MainGame;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
@@ -16,7 +14,7 @@ public class AndroidLauncher extends AndroidApplication {
 //		config.useGLSurfaceView20API18 = true;
 //		initialize(new MyGdxGame(), config);
 //		initialize(new CanyonBunnyMain(), config);
-		initialize(new XYGame(), config);
+		initialize(new MainGame(), config);
 		
 	}
 }

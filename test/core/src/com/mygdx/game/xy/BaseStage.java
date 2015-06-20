@@ -4,15 +4,14 @@ import java.lang.reflect.Constructor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.mygdx.game.xy.Rock.SpriteState;
+import com.mygdx.game.xy.JueSe.SpriteState;
 
-public abstract class XYStage extends Stage{
+public abstract class BaseStage extends Stage{
 	public CameraHelper cameraHelper;
 	private Image ditu;
 
@@ -21,20 +20,21 @@ public abstract class XYStage extends Stage{
 		cameraHelper.setStage(this);
 	}
 	
-	public XYStage(CameraHelper cameraHelper) {
+	public BaseStage(CameraHelper cameraHelper) {
 		super();
 		setCameraHelper(cameraHelper);
 		getCamera().viewportWidth = Constants.VIEWPORT_WIDTH;
 		getCamera().viewportHeight = Constants.VIEWPORT_HEIGHT;
 		getCamera().position.x = 0;
 		getCamera().position.y = 0;
-		
+		Assets.instance.init(getStageFileList());
 		initMap();
 	}
 
 	private void initMap() {
-		Texture dituTexture = new Texture(getMapFileName());
-		dituTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		Texture dituTexture = Assets.instance.getTexture(getMapFileName());
+//		Texture dituTexture = new Texture(getMapFileName());
+//		dituTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		ditu = new Image(dituTexture);
 		ditu.setPosition(0, 0);
 		ditu.setSize(ditu.getWidth()/8, ditu.getHeight()/8);
@@ -51,6 +51,8 @@ public abstract class XYStage extends Stage{
 	}
 	
 	public abstract String getMapFileName();
+	public abstract String[] getStageFileList();
+	
 	public Image getMap(){
 		return ditu;
 	};
@@ -61,28 +63,32 @@ public abstract class XYStage extends Stage{
 		getViewport().setScreenSize(width, height);
 	}
 	
-	public void startStage(Class<? extends XYStage> cls, Vector2 actorPosition, SpriteState actorState){
-		XYStage nextStage = XYGame.findStage(cls);
-		if (nextStage!=null) {
-			XYGame.setCurrentStage(nextStage);
-			nextStage.setActorPositon(actorPosition);
-			nextStage.cameraHelper.setStage(nextStage);
-			MainActor zj = nextStage.getZJ();
-			zj.setOnImpact(true);
-			zj.setState(actorState);
-			nextStage.cameraHelper.setTarget(zj.getGameObject());
-		}else {
+	public void startStage(Class<? extends BaseStage> cls, Vector2 actorPosition, SpriteState actorState){
+		BaseStage nextStage = null;
+//		BaseStage nextStage = MainGame.findStage(cls);
+//		if (nextStage!=null) {
+//			MainGame.setCurrentStage(nextStage);
+//			nextStage.setActorPositon(actorPosition);
+//			nextStage.cameraHelper.setStage(nextStage);
+//			MainActor zj = nextStage.getZJ();
+//			zj.setOnImpact(true);
+//			zj.setState(actorState);
+//			nextStage.cameraHelper.setTarget(zj.getGameObject());
+//		}else {
 			try {
-				Constructor<? extends XYStage> cons = cls.getConstructor(new Class[] { CameraHelper.class , Vector2.class, SpriteState.class});
+				Constructor<? extends BaseStage> cons = cls.getConstructor(new Class[] { CameraHelper.class , Vector2.class, SpriteState.class});
 				nextStage = cons.newInstance(cameraHelper, actorPosition, actorState);
-				XYGame.addCurrentStage(nextStage);
+//				MainGame.addCurrentStage(nextStage);
+				MainGame.setCurrentStage(nextStage);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+//		}
 		nextStage.onResize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		cameraHelper.onResize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 	
-	public abstract void setActorPositon(Vector2 position);
+	public void setActorPositon(Vector2 position){
+		getZJ().setPosition(position.x, position.y);
+	}
 }

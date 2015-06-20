@@ -22,8 +22,8 @@ public class WorldController extends InputAdapter{
 	public Sprite[] testSprites;
 	private int selectedSprite;
 	public CameraHelper cameraHelper;
-	public Rock rock;
-	public Rock rock2;
+	public ShuSheng rock;
+	public ShuSheng rock2;
 	public Sprite dituSprite;
 	private OrthographicCamera camera;
 	
@@ -60,8 +60,8 @@ public class WorldController extends InputAdapter{
 		}
 //		rock = new Rock();
 //		rock2 = new Rock();
-		rock.position= new Vector2(25, -25);
-		rock2.position= new Vector2(0, 0);
+//		rock.position= new Vector2(25, -25);
+//		rock2.position= new Vector2(0, 0);
 		
 		
 		Texture ditu = new Texture("images/map/fangcunshan.jpg");
@@ -157,8 +157,8 @@ public class WorldController extends InputAdapter{
 		
 	private void moveSelectedSprite(float x, float y){
 //		testSprites[selectedSprite].translate(x, y);
-		rock2.position.x+=x;
-		rock2.position.y+=y;
+//		rock2.position.x+=x;
+//		rock2.position.y+=y;
 	}
 	
 	private void updateTestObjects(float deltaTime) {

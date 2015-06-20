@@ -19,14 +19,14 @@ public class CameraHelper {
 
 	private AbstractGameObject target;
 
-	private XYStage stage;
+	private BaseStage stage;
 
 	public CameraHelper() {
 		position = new Vector2();
 		zoom = 1;
 	}
 	
-	public void setStage(XYStage stage) {
+	public void setStage(BaseStage stage) {
 		this.stage = stage;
 	}
 
@@ -37,8 +37,8 @@ public class CameraHelper {
 	}
 
 	public void check() {
-		position.x = target.position.x;
-		position.y = target.position.y + target.dimension.y / 2;
+		position.x = target.getX();
+		position.y = target.getY() + target.getHeight() / 2;
 		if (stage.getMap().getWidth() < position.x
 				+ stage.getCamera().viewportWidth / 2) {
 			position.x = stage.getMap().getWidth()

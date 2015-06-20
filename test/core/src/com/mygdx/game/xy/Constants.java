@@ -6,6 +6,10 @@ public class Constants {
 	
 	public static final float VIEWPORT_HEIGHT = 50f;
 	
+	
+	public static final String TEXTURE_FILE_MAP_FANGCUNSHAN = "images/map/fangcunshan.jpg";
+	public static final String TEXTURE_FILE_MAP_DONGFU = "images/map/dongfu.jpg";
+	
 	public static final String TEXTURE_ATLAS_FILE_NPC = "images/npc.pack.atlas";
 	public static final String TEXTURE_ATLAS_FILE_JUESE = "images/juese.pack.atlas";
 	public static final String TEXTURE_ATLAS_FILE_TEXIAO = "images/texiao.pack.atlas";
@@ -14,7 +18,14 @@ public class Constants {
 	public static final int[] NPC_LONGWANG_FRAM_NUM = new int[]{10, 10, 10, 10};
 	public static final int[] JUESE_SHUSHENG_FRAM_NUM = new int[]{8, 8, 8, 8, 8, 8, 8, 8, 7, 7, 7, 7};
 	
-	public static final String[]  TEXTURE_ATLAS_FILE_LIST_LONGGONG = new String[]{
+	public static final String[]  TEXTURE_ATLAS_FILE_LIST_FANGCUNSHAN = new String[]{
+		TEXTURE_FILE_MAP_FANGCUNSHAN,
+		TEXTURE_ATLAS_FILE_NPC,
+		TEXTURE_ATLAS_FILE_JUESE,
+		TEXTURE_ATLAS_FILE_TEXIAO
+	};
+	public static final String[]  TEXTURE_ATLAS_FILE_LIST_DONGFU= new String[]{
+		TEXTURE_FILE_MAP_DONGFU,
 		TEXTURE_ATLAS_FILE_NPC,
 		TEXTURE_ATLAS_FILE_JUESE,
 		TEXTURE_ATLAS_FILE_TEXIAO

@@ -1,15 +1,15 @@
 package com.mygdx.game.xy;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.xy.Rock.SpriteState;
+import com.mygdx.game.xy.JueSe.SpriteState;
 
-public class SecondStage extends XYStage{
+public class SecondStage extends BaseStage{
 
 	private MainActor actor;
 
 	public SecondStage(CameraHelper cameraHelper, Vector2 actorPosition, SpriteState actorState) {
 		super(cameraHelper);
-		Assets.instance.init(Constants.TEXTURE_ATLAS_FILE_LIST_LONGGONG);
+		long t1 = System.nanoTime();
 		ChuanSongZhen chuansong1 = new ChuanSongZhen();
 		chuansong1.setPosition(18, 13);
 		addActor(chuansong1);
@@ -19,7 +19,8 @@ public class SecondStage extends XYStage{
 		actor.setState(SpriteState.STAND_DOWN);
 		addActor(actor);
 		cameraHelper.setTarget(actor.getGameObject());
-		
+		long t6 = System.nanoTime();
+		System.out.println("¹²ºÄÊ±£º"+(t6-t1));
 		actor.addImpactListener(new ImpactListener(chuansong1) {
 			
 			@Override
@@ -31,7 +32,7 @@ public class SecondStage extends XYStage{
 
 	@Override
 	public String getMapFileName() {
-		return "images/map/dongfu.jpg";
+		return Constants.TEXTURE_FILE_MAP_DONGFU;
 	}
 
 	@Override
@@ -44,8 +45,8 @@ public class SecondStage extends XYStage{
 	}
 
 	@Override
-	public void setActorPositon(Vector2 position) {
-		actor.setPosition(position.x, position.y);
+	public String[] getStageFileList() {
+		return Constants.TEXTURE_ATLAS_FILE_LIST_DONGFU;
 	}
 
 }

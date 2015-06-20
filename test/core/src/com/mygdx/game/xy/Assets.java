@@ -2,6 +2,7 @@ package com.mygdx.game.xy;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,9 +10,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.maps.Map;
@@ -31,22 +34,32 @@ public class Assets implements Disposable, AssetErrorListener{
 
 	
 	private Assets() {
+		this.assetManager = new AssetManager();
 	}
 	
 	public void init(String[] files) {
-		this.assetManager = new AssetManager();
+		long currentTimeMillis = System.nanoTime();
 		assetManager.setErrorListener(this);
 		assetManager.setLoader(Texture.class, ".png", new CipherTextureLoader(new InternalFileHandleResolver()));
 		for (String string : files) {
-			assetManager.load(string, TextureAtlas.class);
+			if (string.contains(".jpg")) {
+				TextureParameter textureParameter = new TextureParameter();
+				textureParameter.minFilter = TextureFilter.Linear;
+				textureParameter.magFilter = TextureFilter.Linear;
+				assetManager.load(string, Texture.class, textureParameter);
+			}else {
+				assetManager.load(string, TextureAtlas.class);
+			}
 		}
 		assetManager.finishLoading();
 		Gdx.app.log(TAG, "# of assets loaded: "+ assetManager.getAssetNames().size);
 		for (String name : assetManager.getAssetNames()) {
 			Gdx.app.log(TAG, "asset: "+name);
 		}
-		
+		System.out.println("º”‘ÿ∫ƒ ±£∫"+(System.nanoTime()-currentTimeMillis));
 	}
+	
+	
 	
 	@Override
 	public void error(AssetDescriptor asset, Throwable throwable) {
@@ -56,7 +69,8 @@ public class Assets implements Disposable, AssetErrorListener{
 
 	@Override
 	public void dispose() {
-		assetManager.dispose();
+//		assetManager.dispose();
+		assetManager.clear();;
 	}
 
 	/**
@@ -80,5 +94,8 @@ public class Assets implements Disposable, AssetErrorListener{
 		return findRegion;
 	}
 	
-	
+	public Texture getTexture(String file){
+		Texture texture = assetManager.get(file, Texture.class);
+		return texture;
+	}
 }

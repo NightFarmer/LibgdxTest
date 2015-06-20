@@ -1,43 +1,38 @@
 package com.mygdx.game.xy;
 
-import java.util.ArrayList;
-
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.mygdx.game.xy.Rock.SpriteState;
+import com.mygdx.game.xy.JueSe.SpriteState;
 
-public class XYGame extends ApplicationAdapter {
-	private static final String TAG = XYGame.class.getName();
+public class MainGame extends ApplicationAdapter {
+	private static final String TAG = MainGame.class.getName();
 	private WorldController worldController;
 	private WorldRenderer worldRenderer;
 	
 	private boolean paused;
-	private static XYStage curentStage;
+	private static BaseStage curentStage;
 	private CameraHelper cameraHelper;
-	private static ArrayList<XYStage> stageList = new ArrayList<XYStage>();
+//	private static ArrayList<BaseStage> stageList = new ArrayList<BaseStage>();
 	
-	public static void addCurrentStage(XYStage curentStage){
-		XYGame.curentStage = curentStage;
-		stageList.add(curentStage);
+//	public static void addCurrentStage(BaseStage curentStage){
+//		MainGame.curentStage = curentStage;
+//		stageList.add(curentStage);
+//	}
+	
+	public static void setCurrentStage(BaseStage curentStage){
+		MainGame.curentStage = curentStage;
 	}
 	
-	public static void setCurrentStage(XYStage curentStage){
-		XYGame.curentStage = curentStage;
-	}
-	
-	public static XYStage findStage(Class<? extends XYStage> cls) {
-		for (XYStage stage : stageList) {
-			if (stage.getClass().equals(cls)) {
-				return stage;
-			}
-		}
-		return null;
-	}
+//	public static BaseStage findStage(Class<? extends BaseStage> cls) {
+//		for (BaseStage stage : stageList) {
+//			if (stage.getClass().equals(cls)) {
+//				return stage;
+//			}
+//		}
+//		return null;
+//	}
 	
 	@Override
 	public void create() {
@@ -48,7 +43,7 @@ public class XYGame extends ApplicationAdapter {
 //		paused = false;
 		cameraHelper = new CameraHelper();
 		  curentStage = new FirstStage(cameraHelper, new Vector2(10, 75), SpriteState.STAND_RIGHT);
-		  stageList.add(curentStage);
+//		  stageList.add(curentStage);
 	}
 	
 	@Override
@@ -79,7 +74,7 @@ public class XYGame extends ApplicationAdapter {
 	@Override
 	public void dispose() {
 //		worldRenderer.dispose();
-//		Assets.instance.dispose();
+		Assets.instance.dispose();
 	}
 	
 }

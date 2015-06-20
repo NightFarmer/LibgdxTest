@@ -5,7 +5,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
 import com.mygdx.game.bunny.CanyonBunnyMain;
-import com.mygdx.game.xy.XYGame;
+import com.mygdx.game.xy.MainGame;
 
 public class DesktopLauncher {
 
@@ -36,6 +36,6 @@ public class DesktopLauncher {
 //		config.height = 180;
 		// new LwjglApplication(new MyGdxGame(), config);
 		// new LwjglApplication(new LeanDev1(), config);
-		new LwjglApplication(new XYGame(), config);
+		new LwjglApplication(new MainGame(), config);
 	}
 }

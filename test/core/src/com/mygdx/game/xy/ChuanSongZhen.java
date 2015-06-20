@@ -12,11 +12,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class ChuanSongZhen extends Actor implements CanImpact{
-	private static ArrayList<AtlasRegion> textureList =  Assets.instance.getList(
+	private   ArrayList<AtlasRegion> textureList =  Assets.instance.getList(
 			Constants.TEXTURE_ATLAS_FILE_TEXIAO, "chuansongzhen", "10",
 			66);
-	private static Animation animation = new Animation(0.025f, textureList.subList(12, 66).toArray(new AtlasRegion[]{}));
+	private   Animation animation = new Animation(0.025f, textureList.subList(12, 66).toArray(new AtlasRegion[]{}));
 	private float stateTime;
+	
 	public ChuanSongZhen() {
 		stateTime = 0f;
 	}
